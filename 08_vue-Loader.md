@@ -13,6 +13,7 @@
 ## webpack이란?
 > 모듈의 묶음이다, .js, .jade, .css와 같이 각 파일을 모듈로 간주하고 , css면 css 끼리, js면 js끼리 파일간 종속성을 파악한 후 정적 Asset으로 변화하여 배포하는 모듈 번들러이다.<br>
 >
+> ![oop](./picture/web_pack.png)
 > webpack을 사용하는 몇가지 예시들
 > - ES2015 또는 CoffeeScript, TypeScript 모듈을 ES5 CommonJS 모듈로 변환.
 > - 선택 사항으로 컴파일 전에 linter를 이용하여 소스 코드를 연결 가능.

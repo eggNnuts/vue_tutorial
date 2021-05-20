@@ -1,4 +1,4 @@
-
+![oop](./picture/vue.png)
 # Intro
 
 공부한 vue.js를 정리한 문서를 저장하는 repository 입니다.
