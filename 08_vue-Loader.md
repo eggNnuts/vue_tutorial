@@ -37,6 +37,9 @@
 > ## entry
 > *웹팩이 파일을 읽어들이기 시작하는 부분 즉,프로젝트에 존재하는 `모든 모듈(자바스크립트,스타일시트,이미지 등)`중 `Entry 속성에 명시된 파일`을 기준으로 의존성 트리를 만들어 하나의 번들 파일을 만들어 냄*
 > - 자바스크립트가 로딩하는 모듈이 많아질수록 모듈간의 `의존성은 증가` 
+> - 웹펙이 프로젝트 구조를 이해하기 위해서 어디로 진입해야 webpack이 프로젝트 구조를 이해 
+할수있는지를 명시한 진입점이 entry설정임
+> - 즉 entry는 vue프로젝트의 최상위 컴포넌트를 지정하면된다(보통 App.vue, java로 치면 클래스의 main함수, 프로젝트의 시작점)
 > - 번들이란?
 >   - 소프트웨어 및 일부 하드웨어와 함께 작동하는 데 필요한 모든 것을 포함하는 Package
 >   - 각각의 모듈들에 대해 의존성 관계를 파악하여 하나 또는 여러개의 그룹으로 볼 수 있음
@@ -58,7 +61,7 @@
 > | publicPath  | `파일들이 위치할 서버 상의 경로` |  
 > | filename | `파일의 이름(경로를 작성하면안됨)` |
 > 
->  - entry가 single 경우
+ 
 >```java
 > module.exports={
 >   entry : './main.js',
@@ -68,23 +71,13 @@
 >   }    
 > }
 >```  
->  - entry가 multiple일 경우  
-> ```java
-> module.exports={
->  entry: {
->    app: './src/app.js',
->    search: './src/search.js'
->  },
->  output: {
->    filename: '[name].js',
->    path: __dirname + '/build'
->  }
->}
->```
-> - `[name]`: 청크의 이름(app과 search처럼 entry의 키값)
-> - `[hash]`: 컴파일할 때마다 랜덤 문자열
-> - `[chunkhash]`: 파일이 달라질 때에만 랜덤 값
-> 
+> - filename 아래의 약어로도 사용할 수 있다
+>   - `[name]`: 청크의 이름(entry의 키값)
+>   - `[hash]`: 컴파일할 때마다 랜덤 문자열
+>   - `[chunkhash]`: 파일이 달라질 때에만 랜덤 값
+>
+> output의 filename은 위의 `[name]`이라는 약어를 통해 entry에 명시된 키값으로 export(명시된 키값으로 각각 파일이 생김)하거나
+> `나머지 2가지 약어` 및 `사용자 정의` 파일이름으로 export할수 있다
 > ## Module(Loader)
 > *웹팩이 웹 애플리케이션을 해석할 때 자바스크립트 파일이 아닌 웹 자원(HTML, CSS, Images, 폰트 등)들을 변환할 수 있도록 도와주는 속성 Loader를 설정하지 않으면 `자바스크립트를 제외한 웹자원`을 webpack으로 `빌드`할때 `Unexpected toke`n 에러발생*
 >
@@ -123,7 +116,7 @@ package.json 의 loader 필드를 이용하여 일반 모듈들은 추가적으�
 > ## Plugin
 > *webpack의 로더가 할 수 없는 일들을 수행할 수 있다.<br>로더는 파일(웹자원)을 해석하고 변환하는 과정을 관여하지만, 플러그인은 해당 결과물의 형태를 바꾸는 역활*<br>
 > - 예를들어 웹팩을 실행할때마다 기존에 있던 번들파일을 먼저 지우고 빌드된 번들파일을 생성할수 있다
->
+> - plugin은 module(Loader)부분이 처리되고나서 후 처리되는 역활을 명시해논 설정임 
 >```java
 >module.exports = {
 >  entry : './main.js',
@@ -144,6 +137,7 @@ package.json 의 loader 필드를 이용하여 일반 모듈들은 추가적으�
 > */
 >  plugins: [new CleanWebpackPlugin("main.js")],
 >};
+> ```
+><br>
 
-> ``
  
